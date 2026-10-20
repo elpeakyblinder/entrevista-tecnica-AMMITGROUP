@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 4 · Manipulación del DOM</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+      margin: 40px auto;
+      max-width: 480px;
+      padding: 0 16px;
+    }
+
+    .container {
+      background: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    span.desc {
+      display: block;
+      color: #6c757d;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: #495057;
+    }
+
+    button.btn-add {
+      background-color: #2b303a;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    button.btn-add:hover {
+      background-color: #1a1d24;
+    }
+
+    .error-msg {
+      color: #dc3545;
+      font-size: 13px;
+      margin-bottom: 12px;
+      min-height: 18px;
+    }
+
+    ul.lista {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0 0;
+    }
+
+    ul.lista li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 14px;
+    }
+
+    ul.lista li:last-child {
+      border-bottom: none;
+    }
+
+    .btn-delete {
+      background: none;
+      border: none;
+      color: #adb5bd;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .btn-delete:hover {
+      color: #dc3545;
+      background-color: #f8d7da;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Lista Dinámica</h2>
+    <span class="desc">Ingresa un elemento y agrégalo a la lista.</span>
+
+    <div class="form-group">
+      <input type="text" id="itemInput" placeholder="Ej. Comprar leche..." autofocus />
+      <button id="addBtn" class="btn-add">Agregar</button>
+    </div>
+
+    <div id="feedback" class="error-msg"></div>
+
+    <ul id="listaElementos" class="lista"></ul>
+  </div>
+
+  <script>
+    const input = document.getElementById('itemInput');
+    const boton = document.getElementById('addBtn');
+    const lista = document.getElementById('listaElementos');
+    const feedback = document.getElementById('feedback');
+
+    function agregarElemento() {
+      const texto = input.value.trim();
+
+      if (texto === '') {
+        feedback.textContent = 'El texto no puede estar vacío.';
+        input.focus();
+        return;
+      }
+
+      feedback.textContent = '';
+
+      const nuevoLi = document.createElement('li');
+
+      const textoSpan = document.createElement('span');
+      textoSpan.textContent = texto;
+      nuevoLi.appendChild(textoSpan);
+
+      const btnEliminar = document.createElement('button');
+      btnEliminar.textContent = '✕';
+      btnEliminar.className = 'btn-delete';
+      btnEliminar.title = 'Eliminar';
+      btnEliminar.addEventListener('click', () => {
+        nuevoLi.remove();
+      });
+      nuevoLi.appendChild(btnEliminar);
+
+      lista.appendChild(nuevoLi);
+
+      input.value = '';
+      input.focus();
+    }
+
+    boton.addEventListener('click', agregarElemento);
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        agregarElemento();
+      }
+    });
+  </script>
+</body>
+</html>
