@@ -1,4 +1,9 @@
-// Ejercicio 3: Carrito de compras
+/*
+3. Carrito de compras
+Escribe una función calcularTotal(carrito) que sume precio * cantidad y aplique un descuento
+de 10% cuando el subtotal sea mayor a $1,000. Devuelve subtotal, descuento y total.
+const carrito = [{precio:400,cantidad:2},{precio:150,cantidad:3}];
+*/
 
 function calcularTotal(carrito) {
   if (!Array.isArray(carrito) || carrito.length === 0) {

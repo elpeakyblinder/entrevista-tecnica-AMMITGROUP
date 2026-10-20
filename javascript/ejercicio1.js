@@ -1,4 +1,9 @@
-// Ejercicio 1: Validación de Formulario
+/*
+1. Validación de formulario
+Crea una función validarUsuario(nombre, correo, edad) que devuelva un objeto { valido, errores }.
+El nombre no puede estar vacío; el correo debe contener @ y un dominio; la edad debe ser un
+número mayor o igual a 18. Muestra dos casos de prueba.
+*/
 
 function validarUsuario(nombre, correo, edad) {
   const errores = [];

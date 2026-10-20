@@ -8,7 +8,10 @@ productos: id (PK), nombre, precio, stock
 ventas: id (PK), cliente_id (FK), producto_id (FK), cantidad, fecha
 */
 
+-- ---------------------------------------------------------------------
 -- 6. Consulta y filtros
+-- Obtén nombre y correo de los clientes cuya ciudad sea “Querétaro”.
+-- ---------------------------------------------------------------------
 SELECT 
     nombre, 
     correo
@@ -16,7 +19,10 @@ FROM clientes
 WHERE ciudad = 'Querétaro';
 
 
+-- ---------------------------------------------------------------------
 -- 7. Ordenamiento
+-- Muestra los cinco productos más caros, incluyendo nombre, precio y stock.
+-- ---------------------------------------------------------------------
 SELECT 
     nombre, 
     precio, 
@@ -26,7 +32,11 @@ ORDER BY precio DESC
 LIMIT 5;
 
 
+-- ---------------------------------------------------------------------
 -- 8. Inserción y actualización
+-- Inserta un producto llamado “Webcam”, precio 899 y stock 12.
+-- Después actualiza su stock a 10 usando su id.
+-- ---------------------------------------------------------------------
 INSERT INTO productos (nombre, precio, stock)
 VALUES ('Webcam', 899, 12);
 
@@ -35,7 +45,11 @@ SET stock = 10
 WHERE id = 9;
 
 
+-- ---------------------------------------------------------------------
 -- 9. JOIN entre tablas
+-- Muestra por cada venta: id de venta, fecha, nombre del cliente,
+-- nombre del producto y cantidad.
+-- ---------------------------------------------------------------------
 SELECT 
     v.id AS venta_id,
     v.fecha,
@@ -48,7 +62,11 @@ INNER JOIN productos p ON v.producto_id = p.id
 ORDER BY v.fecha DESC;
 
 
--- 10. Agrupación y suma (Reto opcional: incluye clientes con 0)
+-- ---------------------------------------------------------------------
+-- 10. Agrupación y suma
+-- Obtén por cliente el importe total de sus compras (cantidad * precio),
+-- ordenado de mayor a menor. Incluye clientes sin compras con total 0 como reto opcional.
+-- ---------------------------------------------------------------------
 SELECT 
     c.id AS cliente_id,
     c.nombre AS cliente,
